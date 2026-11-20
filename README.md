@@ -11,6 +11,13 @@ Bibliotecas por CDN: GSAP + ScrollTrigger (animações), Lenis (scroll suave), G
   - `enjoeiUrl` mostra o botão "Ver no Enjoei" na peça e no rodapé.
 - `css/style.css`: cores e fontes nas variáveis do topo (`:root`).
 
+## Hero
+- Fotos em `img/hero/`: `*-mobile-*.webp` (recorte quadrado com o par inteiro, para celular) e `*-1280/2000.webp` (tablet e desktop).
+- Celular e tablet em pé: foto em cima, texto embaixo. Desktop: texto por cima da foto.
+- Exposição automática (`CONFIG.exposicao`): o `app.js` mede a foto e, se ela for clara, escurece sozinho.
+  Com texto por cima, mede só a área atrás do texto. Sem texto por cima, segura só os pontos mais claros.
+  Para fixar um valor numa foto: `data-exposure="0.7"` no `<img>`.
+
 ## Pronto para e-commerce
 - Cada produto já tem `id` (SKU), `preco`, `estoque` e `slug`.
 - Página da peça abre por URL: `#peca-<slug>` (ex.: `#peca-air-jordan-1-low`).

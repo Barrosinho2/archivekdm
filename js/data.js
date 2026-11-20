@@ -19,6 +19,12 @@ window.CONFIG = {
     mode: 'dm',            // 'dm' hoje. Futuro: 'nuvemshop' | 'shopify' | 'stripe' | 'mercadopago'
     moeda: 'BRL'
   },
+  /* Hero e destaques: se a foto for clara, a exposição baixa sozinha.
+     Com texto por cima da foto: alvoMedia e alvoAltas = brilho máximo (0 a 1) atrás do texto.
+     Com o texto fora da foto (hero no celular): alvoBrilhos = brilho máximo dos pontos mais claros.
+     minimo: o quanto pode escurecer no máximo (0.55 = 45% mais escura).
+     Para fixar à mão em uma foto: data-exposure="0.7" no <img>. */
+  exposicao: { auto: true, alvoMedia: 0.22, alvoAltas: 0.52, alvoBrilhos: 0.62, minimo: 0.55 },
   frases: {
     bio: 'Onde há Deus, nada faltará!',
     entrega: 'Entregamos para todo o Brasil.',
@@ -40,13 +46,14 @@ window.CATEGORIAS = [
    encomenda: true quando a legenda dizia "VENDIDO SOB ENCOMENDA"
    preco em reais (number) ou null
    estoque: peça única = 1 (0 quando vendida) -> pronto para e-commerce
-   capa: índice (0-based) da foto principal; hover: foto que aparece no hover do card */
+   capa: índice (0-based) da foto principal; hover: foto que aparece no hover do card
+   destaque: foto usada no bloco "Disponível agora" (opcional; padrão = capa) */
 window.PRODUTOS = [
   {
     id: 'kdm-001', slug: 'air-jordan-1-low', nome: 'Air Jordan 1 Low', marca: 'Jordan', categoria: 'tenis',
     preco: 299.90, status: 'disponivel', encomenda: false, estoque: 1,
     tamanho: '41', cond: 10, cor: 100, obs: null,
-    recorte: 'img/recortes/air-jordan-1-low.webp', capa: 0, hover: 2, data: '2026-10-31',
+    recorte: 'img/recortes/air-jordan-1-low.webp', capa: 0, hover: 2, destaque: 3, data: '2026-10-31',
     post: 'https://www.instagram.com/archivekdm/p/DfK4r1clClU/',
     fotos: ['img/produtos/air-jordan-1-low-01.webp','img/produtos/air-jordan-1-low-02.webp','img/produtos/air-jordan-1-low-03.webp','img/produtos/air-jordan-1-low-04.webp','img/produtos/air-jordan-1-low-05.webp']
   },

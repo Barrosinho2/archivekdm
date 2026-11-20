@@ -72,23 +72,32 @@
 <!-- Faixa de mensagens -->
 <div class="ticker" aria-label="Avisos">
   <div class="ticker__track">
-    <span>+80 artigos vendidos</span><i></i><span>Fotos reais do produto</span><i></i><span>Compras via DM ou Enjoei</span><i></i><span>Desde 2024</span><i></i>
-    <span>+80 artigos vendidos</span><i></i><span>Fotos reais do produto</span><i></i><span>Compras via DM ou Enjoei</span><i></i><span>Desde 2024</span><i></i>
+    <span>+80 artigos vendidos</span><i></i><span>Fotos reais do produto</span><i></i><span>Tatuí-SP · Entregamos para todo o Brasil</span><i></i><span>Compras via DM ou Enjoei</span><i></i><span>Desde 2024</span><i></i>
+    <span>+80 artigos vendidos</span><i></i><span>Fotos reais do produto</span><i></i><span>Tatuí-SP · Entregamos para todo o Brasil</span><i></i><span>Compras via DM ou Enjoei</span><i></i><span>Desde 2024</span><i></i>
   </div>
 </div>
 
 <main id="topo">
 
-  <!-- HERO -->
+  <!-- HERO
+       Celular: foto quadrada com o par inteiro e o texto embaixo.
+       Tablet em pé: foto 4:3 com o texto embaixo.
+       Desktop: foto em tela cheia com o texto por cima.
+       data-exposure="auto": se a foto for clara, o app.js baixa a exposição. -->
   <section class="hero" aria-label="Destaque">
-    <div class="hero__media">
-      <img src="img/produtos/air-jordan-1-low-01.webp" alt="Par de Air Jordan 1 Low azul, preto e branco no piso preto" class="hero__img">
+    <div class="hero__media" data-exposure-window>
+      <picture>
+        <source media="(max-width: 599px)" srcset="img/hero/air-jordan-1-low-mobile-800.webp 800w, img/hero/air-jordan-1-low-mobile-1600.webp 1600w" sizes="100vw">
+        <img src="img/hero/air-jordan-1-low-2000.webp" srcset="img/hero/air-jordan-1-low-1280.webp 1280w, img/hero/air-jordan-1-low-2000.webp 2000w" sizes="100vw"
+             alt="Par de Air Jordan 1 Low azul, preto e branco no piso preto" class="hero__img" fetchpriority="high" decoding="async"
+             data-exposure="auto" data-exposure-text=".hero__copy">
+      </picture>
     </div>
     <div class="hero__copy">
-      <p class="eyebrow">Disponível · Tamanho 41 · Cond. 10/10</p>
+      <p class="eyebrow">Disponível · Tam. 41 · Cond. 10/10 · R$ 299,90</p>
       <h1 class="display hero__title"><span class="line"><span>Air Jordan</span></span><span class="line"><span>1 Low</span></span></h1>
       <div class="hero__actions">
-        <button class="btn btn--light" data-open="air-jordan-1-low"><span data-t="Comprar · R$ 299,90">Comprar · R$ 299,90</span></button>
+        <button class="btn btn--light" data-open="air-jordan-1-low"><span data-t="Comprar">Comprar</span></button>
         <a class="btn btn--ghost-light" href="#loja"><span data-t="Ver todas as peças">Ver todas as peças</span></a>
       </div>
     </div>
@@ -177,8 +186,17 @@
         </label>
       </div>
     </div>
+    <div class="chips" id="chips" aria-label="Filtros rápidos"></div>
     <div class="shop__body">
       <aside class="filters" id="filters" aria-label="Filtros">
+        <div class="filters__head">
+          <p class="h2">Filtrar</p>
+          <button class="icon-btn filters__close" aria-label="Fechar filtros"><svg><use href="#i-close"/></svg></button>
+        </div>
+        <div class="filters__group filters__sort">
+          <p class="filters__title">Ordenar por</p>
+          <div id="f-sort"></div>
+        </div>
         <div class="filters__group">
           <p class="filters__title">Disponibilidade</p>
           <div id="f-status"></div>
@@ -192,6 +210,10 @@
           <div id="f-marca"></div>
         </div>
         <button class="text-btn text-btn--u" id="limpar">Limpar filtros</button>
+        <div class="filters__apply">
+          <button class="btn btn--outline" data-clear><span data-t="Limpar">Limpar</span></button>
+          <button class="btn btn--dark" id="aplicar"><span data-t="Ver peças">Ver peças</span></button>
+        </div>
       </aside>
       <div class="grid" id="grid" aria-live="polite"></div>
     </div>
@@ -268,13 +290,16 @@
 <!-- PDP (detalhe da peça) -->
 <div class="pdp" id="pdp" role="dialog" aria-modal="true" aria-labelledby="pdp-name" hidden>
   <div class="pdp__scrim" data-close></div>
-  <div class="pdp__panel">
-    <button class="icon-btn pdp__close" data-close aria-label="Fechar"><svg><use href="#i-close"/></svg></button>
+  <div class="pdp__panel" id="pdp-panel">
+    <div class="pdp__top"><button class="icon-btn pdp__close" data-close aria-label="Fechar"><svg><use href="#i-close"/></svg></button></div>
     <div class="pdp__gallery">
       <div class="pdp__thumbs" id="pdp-thumbs"></div>
       <div class="pdp__main"><img id="pdp-img" alt=""></div>
+      <div class="pdp__slides" id="pdp-slides"></div>
+      <span class="pdp__count" id="pdp-count" aria-hidden="true"></span>
     </div>
     <div class="pdp__info" id="pdp-info"></div>
+    <div class="pdp__buybar" id="pdp-buybar"></div>
   </div>
 </div>
 
@@ -305,6 +330,11 @@
     <a href="#fotos-reais">Fotos reais <svg><use href="#i-chev"/></svg></a>
     <a href="#como-comprar">Como comprar <svg><use href="#i-chev"/></svg></a>
   </nav>
+  <div class="mnav__extra">
+    <button class="mnav__btn" data-drawer="favs"><svg><use href="#i-heart"/></svg>Favoritos <span data-count="favs"></span></button>
+    <button class="mnav__btn" data-drawer="bag"><svg><use href="#i-bag"/></svg>Sacola <span data-count="bag"></span></button>
+  </div>
+  <p class="mnav__info">Tatuí-SP · Entregamos para todo o Brasil<br><a href="https://www.instagram.com/archivekdm/" target="_blank" rel="noopener">@archivekdm</a></p>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
