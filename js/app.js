@@ -74,7 +74,7 @@
      visível inteira, quando o texto está fora dela) e baixa a exposição
      só se a foto for clara. Regulagem em CONFIG.exposicao. */
   const Exposure = {
-    cfg: Object.assign({ auto: true, alvoMedia: 0.22, alvoAltas: 0.52, alvoBrilhos: 0.62, minimo: 0.55 }, C.exposicao || {}),
+    cfg: Object.assign({ auto: true, alvoMedia: 0.22, alvoAltas: 0.52, alvoMediaFoto: 0.28, alvoBrilhos: 0.62, minimo: 0.55 }, C.exposicao || {}),
     async apply(img) {
       if (!this.cfg.auto) return;
       const fixed = parseFloat(img.dataset.exposure);
@@ -86,7 +86,8 @@
         if (!wr.width || !wr.height) return;
         // caixa da imagem (sem transformações) dentro da janela visível
         const ix = img.offsetLeft, iy = img.offsetTop, iw = img.offsetWidth, ih = img.offsetHeight;
-        let roi = { x: Math.max(0, ix), y: Math.max(0, iy), r: Math.min(wr.width, ix + iw), b: Math.min(wr.height, iy + ih) };
+        const visible = { x: Math.max(0, ix), y: Math.max(0, iy), r: Math.min(wr.width, ix + iw), b: Math.min(wr.height, iy + ih) };
+        let roi = visible;
         const sel = img.dataset.exposureText;
         const scope = img.closest('[data-exposure-scope]') || document;
         const text = sel ? scope.querySelector(sel) : null;
@@ -101,26 +102,37 @@
         const s = Math.max(iw / nw, ih / nh);
         const pos = getComputedStyle(img).objectPosition.split(' ').map(v => v.endsWith('%') ? parseFloat(v) / 100 : .5);
         const ox = (iw - nw * s) * pos[0], oy = (ih - nh * s) * (pos[1] ?? .5);
-        const sx = (roi.x - ix - ox) / s, sy = (roi.y - iy - oy) / s, sw = (roi.r - roi.x) / s, sh = (roi.b - roi.y) / s;
         // com srcset, naturalWidth vem "corrigido" pela densidade; o canvas desenha em pixels reais
         const bmp = new Image(); bmp.src = img.currentSrc || img.src; await bmp.decode();
         const k = bmp.naturalWidth / nw;
-        const cw = 96, ch = Math.max(8, Math.round(96 * sh / sw));
-        const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
-        const ctx = cv.getContext('2d', { willReadFrequently: true });
-        ctx.drawImage(bmp, Math.max(0, sx) * k, Math.max(0, sy) * k, Math.min(nw, sw) * k, Math.min(nh, sh) * k, 0, 0, cw, ch);
-        const d = ctx.getImageData(0, 0, cw, ch).data, lum = [];
-        for (let i = 0; i < d.length; i += 4) lum.push((.2126 * d[i] + .7152 * d[i + 1] + .0722 * d[i + 2]) / 255);
-        lum.sort((a, b) => a - b);
-        const mean = lum.reduce((a, b) => a + b, 0) / lum.length;
-        // com texto por cima: o fundo do texto inteiro precisa ser escuro (média e 90% mais escuros).
-        // sem texto por cima: só segura os pontos mais claros da foto (3% mais claros), sem apagar a peça.
-        const hi = lum[Math.floor(lum.length * (overlay ? .9 : .97))];
-        const f = Math.max(this.cfg.minimo, Math.min(1,
-          overlay ? this.cfg.alvoMedia / mean : 1,
-          (overlay ? this.cfg.alvoAltas : this.cfg.alvoBrilhos) / hi));
+        const stats = r => {
+          const sx = (r.x - ix - ox) / s, sy = (r.y - iy - oy) / s, sw = (r.r - r.x) / s, sh = (r.b - r.y) / s;
+          const cw = 96, ch = Math.max(8, Math.round(96 * sh / sw));
+          const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+          const ctx = cv.getContext('2d', { willReadFrequently: true });
+          ctx.drawImage(bmp, Math.max(0, sx) * k, Math.max(0, sy) * k, Math.min(nw, sw) * k, Math.min(nh, sh) * k, 0, 0, cw, ch);
+          const d = ctx.getImageData(0, 0, cw, ch).data, lum = [];
+          for (let i = 0; i < d.length; i += 4) lum.push((.2126 * d[i] + .7152 * d[i + 1] + .0722 * d[i + 2]) / 255);
+          lum.sort((a, b) => a - b);
+          return { mean: lum.reduce((a, b) => a + b, 0) / lum.length, p90: lum[Math.floor(lum.length * .9)], p97: lum[Math.floor(lum.length * .97)] };
+        };
+        const c = this.cfg, notes = [];
+        let f = 1;
+        // hero: a foto inteira não pode ser clara (média) nem estourar nos pontos mais claros
+        if ('exposureFoto' in img.dataset) {
+          const w = stats(visible);
+          f = Math.min(f, c.alvoMediaFoto / w.mean, c.alvoBrilhos / w.p97);
+          notes.push(`foto inteira: média ${w.mean.toFixed(2)}, claros ${w.p97.toFixed(2)}`);
+        }
+        // texto por cima: o fundo do texto precisa ser escuro
+        if (overlay) {
+          const t = stats(roi);
+          f = Math.min(f, c.alvoMedia / t.mean, c.alvoAltas / t.p90);
+          notes.push(`atrás do texto: média ${t.mean.toFixed(2)}, claros ${t.p90.toFixed(2)}`);
+        }
+        f = Math.max(c.minimo, f);
         img.style.setProperty('--exposure', f.toFixed(3));
-        img.dataset.exposureMedida = `${overlay ? 'atrás do texto' : 'foto inteira'} · média ${mean.toFixed(2)} · claros ${hi.toFixed(2)} · brilho ${f.toFixed(2)}`;
+        img.dataset.exposureMedida = `${notes.join(' · ')} · brilho ${f.toFixed(2)}`;
       } catch (e) { /* imagem de outro domínio ou sem canvas: fica como está */ }
     },
     all() { $$('img[data-exposure]').forEach(img => this.apply(img)); }
@@ -518,14 +530,24 @@
   UI.counts();
   renderGrid(false);
 
+  /* título da hero: a linha mais longa ocupa a largura disponível, até o máximo do CSS (--title-max) */
+  const fitHero = () => {
+    const h = $('.hero__title'); if (!h) return;
+    h.style.fontSize = '100px';
+    const widest = Math.max(...$$('.hero__title .line > span').map(l => l.offsetWidth));
+    const max = parseFloat(getComputedStyle(h).getPropertyValue('--title-max')) || 200;
+    h.style.fontSize = Math.min(max, Math.floor(100 * h.clientWidth / widest * .985)) + 'px';
+  };
+
   /* palavra do rodapé ocupa a largura toda */
   const fit = () => {
     const w = $('.footer__word'); w.style.fontSize = '100px';
     const [a, b] = w.children, need = a.offsetWidth + b.offsetWidth + 25;
     w.style.fontSize = Math.floor(100 * w.clientWidth / need * .985) + 'px';
   };
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { fit(); Exposure.all(); });
-  addEventListener('resize', debounce(() => { fit(); Exposure.all(); }, 250));
+  fitHero();
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { fitHero(); fit(); Exposure.all(); });
+  addEventListener('resize', debounce(() => { fitHero(); fit(); Exposure.all(); }, 250));
   $$('img[data-exposure]').forEach(img => img.addEventListener('load', () => Exposure.apply(img)));   // troca de foto (celular <-> desktop)
   Exposure.all();
 

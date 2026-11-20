@@ -19,12 +19,12 @@ window.CONFIG = {
     mode: 'dm',            // 'dm' hoje. Futuro: 'nuvemshop' | 'shopify' | 'stripe' | 'mercadopago'
     moeda: 'BRL'
   },
-  /* Hero e destaques: se a foto for clara, a exposição baixa sozinha.
-     Com texto por cima da foto: alvoMedia e alvoAltas = brilho máximo (0 a 1) atrás do texto.
-     Com o texto fora da foto (hero no celular): alvoBrilhos = brilho máximo dos pontos mais claros.
+  /* Hero e destaques: se a foto for clara, a exposição baixa sozinha (brilhos de 0 a 1).
+     Hero: a foto inteira não passa de alvoMediaFoto na média nem de alvoBrilhos nos pontos mais claros.
+     Texto por cima da foto (hero no desktop e destaques): atrás do texto, no máximo alvoMedia na média e alvoAltas nas partes claras.
      minimo: o quanto pode escurecer no máximo (0.55 = 45% mais escura).
      Para fixar à mão em uma foto: data-exposure="0.7" no <img>. */
-  exposicao: { auto: true, alvoMedia: 0.22, alvoAltas: 0.52, alvoBrilhos: 0.62, minimo: 0.55 },
+  exposicao: { auto: true, alvoMedia: 0.22, alvoAltas: 0.52, alvoMediaFoto: 0.28, alvoBrilhos: 0.62, minimo: 0.55 },
   frases: {
     bio: 'Onde há Deus, nada faltará!',
     entrega: 'Entregamos para todo o Brasil.',
@@ -61,7 +61,7 @@ window.PRODUTOS = [
     id: 'kdm-002', slug: 'polo-lacoste-yasburkey', nome: 'Polo Edição Lacoste x Yasburkey', marca: 'Lacoste', categoria: 'polos',
     preco: 199.90, status: 'disponivel', encomenda: false, estoque: 1,
     tamanho: 'T4/M', cond: 9.7, cor: 98, obs: null,
-    recorte: 'img/recortes/polo-lacoste-yasburkey.webp', capa: 0, hover: 2, data: '2026-11-14',
+    recorte: 'img/recortes/polo-lacoste-yasburkey.webp', capa: 0, hover: 2, destaque: 1, data: '2026-11-14',
     post: 'https://www.instagram.com/archivekdm/p/DfvE5IDlEls/',
     fotos: ['img/produtos/polo-lacoste-yasburkey-01.webp','img/produtos/polo-lacoste-yasburkey-02.webp','img/produtos/polo-lacoste-yasburkey-03.webp','img/produtos/polo-lacoste-yasburkey-04.webp']
   },
