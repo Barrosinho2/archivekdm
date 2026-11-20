@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KDM Archiving · Peças de marca com fotos reais · Tatuí-SP</title>
+  <meta name="description" content="+80 artigos vendidos. Tênis, polos, agasalhos e camisas de marca com fotos reais do produto. Tatuí-SP, entregamos para todo o Brasil. Compras via DM ou Enjoei.">
+  <meta property="og:title" content="KDM Archiving">
+  <meta property="og:description" content="Fotos reais do produto. Entregamos para todo o Brasil.">
+  <meta property="og:image" content="img/marca/og-image-1200x630.png">
+  <link rel="icon" href="img/marca/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/marca/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.75" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.25S3.75 15.2 3.75 9.3A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 8.25 2.1c0 5.9-8.25 10.95-8.25 10.95Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4.5 8.25h15l-1.2 12H5.7l-1.2-12Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 8.25V7a3.5 3.5 0 0 1 7 0v1.25" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5.5 6.5 6.5L9 18.5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m5.5 5.5 13 13m0-13-13 13" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.75 7.5h16.5M3.75 12h16.5M3.75 16.5h16.5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+</svg>
+
+<!-- Barra utilitária -->
+<div class="utility">
+  <div class="utility__in">
+    <span>Tatuí-SP · Entregamos para todo o Brasil</span>
+    <nav aria-label="Atalhos">
+      <a href="#como-comprar">Como comprar</a>
+      <span aria-hidden="true">|</span>
+      <a href="#ajuda">Ajuda</a>
+      <span aria-hidden="true">|</span>
+      <a href="https://www.instagram.com/archivekdm/" target="_blank" rel="noopener">@archivekdm</a>
+    </nav>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="header__in">
+    <a class="brand" href="#topo" aria-label="KDM Archiving, início">
+      <img src="img/marca/logo-kdm.png" alt="" width="44" height="45">
+      <span class="brand__name">KDM<small>Archiving</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#loja" data-filter-status="disponivel">Disponível</a>
+      <a href="#loja" data-filter-status="encomenda">Sob encomenda</a>
+      <a href="#loja" data-filter-status="vendido">Arquivo</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#fotos-reais">Fotos reais</a>
+    </nav>
+    <div class="header__tools">
+      <label class="search">
+        <svg><use href="#i-search"/></svg>
+        <input type="search" id="busca" placeholder="Buscar" autocomplete="off" aria-label="Buscar peças">
+      </label>
+      <button class="icon-btn" id="btn-favs" aria-label="Favoritos"><svg><use href="#i-heart"/></svg><span class="badge" data-count="favs"></span></button>
+      <button class="icon-btn" id="btn-bag" aria-label="Sacola"><svg><use href="#i-bag"/></svg><span class="badge" data-count="bag"></span></button>
+      <button class="icon-btn icon-btn--menu" id="btn-menu" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- Faixa de mensagens -->
+<div class="ticker" aria-label="Avisos">
+  <div class="ticker__track">
+    <span>+80 artigos vendidos</span><i></i><span>Fotos reais do produto</span><i></i><span>Compras via DM ou Enjoei</span><i></i><span>Desde 2024</span><i></i>
+    <span>+80 artigos vendidos</span><i></i><span>Fotos reais do produto</span><i></i><span>Compras via DM ou Enjoei</span><i></i><span>Desde 2024</span><i></i>
+  </div>
+</div>
+
+<main id="topo">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Destaque">
+    <div class="hero__media">
+      <img src="img/produtos/air-jordan-1-low-01.webp" alt="Par de Air Jordan 1 Low azul, preto e branco no piso preto" class="hero__img">
+    </div>
+    <div class="hero__copy">
+      <p class="eyebrow">Disponível · Tamanho 41 · Cond. 10/10</p>
+      <h1 class="display hero__title"><span class="line"><span>Air Jordan</span></span><span class="line"><span>1 Low</span></span></h1>
+      <div class="hero__actions">
+        <button class="btn btn--light" data-open="air-jordan-1-low"><span data-t="Comprar · R$ 299,90">Comprar · R$ 299,90</span></button>
+        <a class="btn btn--ghost-light" href="#loja"><span data-t="Ver todas as peças">Ver todas as peças</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTADOR -->
+  <section class="count" aria-label="Vendidos">
+    <p class="eyebrow">Desde 2024 em Tatuí-SP</p>
+    <h2 class="display count__num">+<span id="contador">80</span> artigos vendidos</h2>
+    <p class="count__sub">Onde há Deus, nada faltará!</p>
+  </section>
+
+  <!-- DUO DISPONÍVEL -->
+  <section class="duo" aria-labelledby="duo-t">
+    <div class="section-head">
+      <h2 id="duo-t" class="h2">Disponível agora</h2>
+      <a class="link-arrow" href="#loja" data-filter-status="disponivel">Ver disponíveis <svg><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="duo__grid" id="duo"></div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="cats" id="categorias" aria-labelledby="cats-t">
+    <div class="section-head">
+      <h2 id="cats-t" class="h2">Compre por categoria</h2>
+      <div class="rail-ctrl">
+        <button class="round-btn" data-rail="cats" data-dir="-1" aria-label="Anterior"><svg style="transform:scaleX(-1)"><use href="#i-chev"/></svg></button>
+        <button class="round-btn" data-rail="cats" data-dir="1" aria-label="Próximo"><svg><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="rail" id="rail-cats"></div>
+  </section>
+
+  <!-- MANIFESTO (texto que acende no scroll) -->
+  <section class="manifesto" aria-label="Como trabalhamos">
+    <p class="manifesto__text" id="manifesto">Cada peça é única. Fotografada de verdade, etiqueta por etiqueta. Avaliada de 0 a 10. Postou, vendeu, foi para o arquivo.</p>
+  </section>
+
+  <!-- FOTOS REAIS (pin + horizontal) -->
+  <section class="real" id="fotos-reais" aria-labelledby="real-t">
+    <div class="real__pin">
+      <div class="real__head">
+        <p class="eyebrow eyebrow--light">Sem foto de catálogo</p>
+        <h2 id="real-t" class="display real__title">Fotos reais<br>do produto</h2>
+        <p class="real__text">Gola, etiqueta, solado, costura. Antes de comprar, você vê a peça que vai receber.</p>
+      </div>
+      <div class="real__track" id="real-track"></div>
+    </div>
+  </section>
+
+  <!-- FICHA -->
+  <section class="ficha" aria-labelledby="ficha-t">
+    <div class="ficha__copy">
+      <p class="eyebrow">Como avaliamos</p>
+      <h2 id="ficha-t" class="h1">A ficha de cada peça</h2>
+      <p>Toda peça sai com a mesma ficha: nota de conservação, tamanho e quanto da cor original ela mantém. Detalhes, quando existem, vão escritos.</p>
+      <p class="small">Fotos reais do produto, não aceitamos devolução, compre via DM ou Enjoei.</p>
+    </div>
+    <article class="tag" aria-label="Exemplo de ficha">
+      <div class="tag__hole" aria-hidden="true"></div>
+      <p class="tag__brand">KDM · Archiving</p>
+      <h3 class="tag__name">Polo Edição Lacoste x Yasburkey</h3>
+      <dl class="tag__rows">
+        <div><dt>Cond.</dt><dd><span class="meter" style="--v:.97"><i></i></span><b>9,7/10</b></dd></div>
+        <div><dt>Cor</dt><dd><span class="meter" style="--v:.98"><i></i></span><b>98%</b></dd></div>
+        <div><dt>Tamanho</dt><dd><b>T4/M</b></dd></div>
+        <div><dt>Preço</dt><dd><b>R$ 199,90</b></dd></div>
+      </dl>
+      <button class="btn btn--dark btn--block" data-open="polo-lacoste-yasburkey"><span data-t="Ver a peça">Ver a peça</span></button>
+    </article>
+  </section>
+
+  <!-- LOJA / PLP -->
+  <section class="shop" id="loja" aria-labelledby="shop-t">
+    <div class="shop__bar">
+      <h2 id="shop-t" class="h2">Todas as peças <span class="muted" id="shop-count"></span></h2>
+      <div class="shop__tools">
+        <button class="text-btn" id="toggle-filters"><span>Ocultar filtros</span> <svg><use href="#i-filter"/></svg></button>
+        <label class="sort">Ordenar por
+          <select id="ordenar">
+            <option value="recentes">Mais recentes</option>
+            <option value="disponiveis">Disponíveis primeiro</option>
+            <option value="cond">Maior nota</option>
+            <option value="az">A–Z</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="shop__body">
+      <aside class="filters" id="filters" aria-label="Filtros">
+        <div class="filters__group">
+          <p class="filters__title">Disponibilidade</p>
+          <div id="f-status"></div>
+        </div>
+        <div class="filters__group">
+          <p class="filters__title">Categoria</p>
+          <div id="f-cat"></div>
+        </div>
+        <div class="filters__group">
+          <p class="filters__title">Marca</p>
+          <div id="f-marca"></div>
+        </div>
+        <button class="text-btn text-btn--u" id="limpar">Limpar filtros</button>
+      </aside>
+      <div class="grid" id="grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ENCOMENDA -->
+  <section class="order" aria-labelledby="order-t">
+    <div class="order__media"><img src="img/produtos/nike-tech-fleece-black-01.webp" alt="Tech Fleece preto no chão de concreto"></div>
+    <div class="order__copy">
+      <p class="eyebrow eyebrow--light">Vendido sob encomenda</p>
+      <h2 id="order-t" class="display order__title">Não achou?<br>A gente procura.</h2>
+      <p>O Tech Fleece, a polo Puma BMW e a polo Tommy saíram sob encomenda. Diga a peça, a marca e o tamanho.</p>
+      <button class="btn btn--light" data-dm="encomenda"><span data-t="Pedir pela DM">Pedir pela DM</span></button>
+    </div>
+  </section>
+
+  <!-- COMO COMPRAR -->
+  <section class="how" id="como-comprar" aria-labelledby="how-t">
+    <h2 id="how-t" class="h2">Como comprar</h2>
+    <ol class="how__list">
+      <li><span class="how__n">01</span><h3>Escolha a peça</h3><p>Veja as fotos reais e a ficha. Separe na sacola.</p></li>
+      <li><span class="how__n">02</span><h3>Chame na DM</h3><p>A mensagem com a peça, o tamanho e o preço já vai pronta. Também vendemos pelo Enjoei.</p></li>
+      <li><span class="how__n">03</span><h3>Receba em casa</h3><p>Saímos de Tatuí-SP. Entregamos para todo o Brasil.</p></li>
+    </ol>
+  </section>
+
+  <!-- AJUDA -->
+  <section class="faq" id="ajuda" aria-labelledby="faq-t">
+    <h2 id="faq-t" class="h2">Ajuda</h2>
+    <div class="faq__list">
+      <details><summary>Como eu compro?<svg><use href="#i-plus"/></svg></summary><p>Pela DM do Instagram (@archivekdm) ou pelo Enjoei. Separe as peças na sacola e toque em “Finalizar pela DM”: a mensagem já vai pronta.</p></details>
+      <details><summary>Vocês entregam na minha cidade?<svg><use href="#i-plus"/></svg></summary><p>Entregamos para todo o Brasil, saindo de Tatuí-SP.</p></details>
+      <details><summary>As fotos são da peça que eu vou receber?<svg><use href="#i-plus"/></svg></summary><p>Sim. Fotos reais do produto, com etiqueta e detalhes.</p></details>
+      <details><summary>Posso devolver?<svg><use href="#i-plus"/></svg></summary><p>Não aceitamos devolução. Por isso cada ficha traz nota de conservação, tamanho, cor e qualquer detalhe da peça.</p></details>
+      <details><summary>O que é “Cond. 9,7/10”?<svg><use href="#i-plus"/></svg></summary><p>É a nota de conservação da peça, de 0 a 10. “Cor” mostra quanto da cor original ela mantém.</p></details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__cols">
+    <div>
+      <p class="footer__h">KDM Archiving</p>
+      <p>Tatuí-SP</p>
+      <p>Entregamos para todo o Brasil.</p>
+      <p>Compras via DM ou Enjoei.</p>
+    </div>
+    <div>
+      <p class="footer__h">Loja</p>
+      <a href="#loja" data-filter-status="disponivel">Disponível</a>
+      <a href="#loja" data-filter-status="encomenda">Sob encomenda</a>
+      <a href="#loja" data-filter-status="vendido">Arquivo</a>
+    </div>
+    <div>
+      <p class="footer__h">Ajuda</p>
+      <a href="#como-comprar">Como comprar</a>
+      <a href="#ajuda">Perguntas</a>
+      <a href="https://ig.me/m/archivekdm" target="_blank" rel="noopener">Falar na DM</a>
+    </div>
+    <div>
+      <p class="footer__h">Redes</p>
+      <a href="https://www.instagram.com/archivekdm/" target="_blank" rel="noopener">Instagram @archivekdm</a>
+      <a href="#" data-enjoei hidden>Enjoei</a>
+    </div>
+  </div>
+  <p class="footer__word display" aria-hidden="true"><span>KDM</span><span>Archiving</span></p>
+  <div class="footer__legal">
+    <span>© 2026 KDM Archiving · Desde 2024</span>
+    <span>Onde há Deus, nada faltará!</span>
+  </div>
+</footer>
+
+<!-- PDP (detalhe da peça) -->
+<div class="pdp" id="pdp" role="dialog" aria-modal="true" aria-labelledby="pdp-name" hidden>
+  <div class="pdp__scrim" data-close></div>
+  <div class="pdp__panel">
+    <button class="icon-btn pdp__close" data-close aria-label="Fechar"><svg><use href="#i-close"/></svg></button>
+    <div class="pdp__gallery">
+      <div class="pdp__thumbs" id="pdp-thumbs"></div>
+      <div class="pdp__main"><img id="pdp-img" alt=""></div>
+    </div>
+    <div class="pdp__info" id="pdp-info"></div>
+  </div>
+</div>
+
+<!-- Sacola / Favoritos -->
+<aside class="drawer" id="drawer" aria-label="Sacola" hidden>
+  <div class="drawer__scrim" data-close-drawer></div>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <h2 class="h2" id="drawer-title">Sacola</h2>
+      <button class="icon-btn" data-close-drawer aria-label="Fechar"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <div class="drawer__body" id="drawer-body"></div>
+    <div class="drawer__foot" id="drawer-foot"></div>
+  </div>
+</aside>
+
+<!-- Menu mobile -->
+<div class="mnav" id="mnav" hidden>
+  <div class="mnav__head">
+    <span class="brand__name">KDM<small>Archiving</small></span>
+    <button class="icon-btn" id="mnav-close" aria-label="Fechar menu"><svg><use href="#i-close"/></svg></button>
+  </div>
+  <nav>
+    <a href="#loja" data-filter-status="disponivel">Disponível <svg><use href="#i-chev"/></svg></a>
+    <a href="#loja" data-filter-status="encomenda">Sob encomenda <svg><use href="#i-chev"/></svg></a>
+    <a href="#loja" data-filter-status="vendido">Arquivo <svg><use href="#i-chev"/></svg></a>
+    <a href="#categorias">Categorias <svg><use href="#i-chev"/></svg></a>
+    <a href="#fotos-reais">Fotos reais <svg><use href="#i-chev"/></svg></a>
+    <a href="#como-comprar">Como comprar <svg><use href="#i-chev"/></svg></a>
+  </nav>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
